@@ -1,6 +1,11 @@
 # docs: https://github.com/AndyObtiva/glimmer-dsl-libui#area-text
-require 'glimmer-dsl-libui'
+# API Key
+# https://apilayer.com/marketplace/exchangerates_data-api
 
+require 'glimmer-dsl-libui'
+require 'dotenv'
+
+Dotenv.load
 include Glimmer
 
 data = [
@@ -38,6 +43,5 @@ window('Currency Converter', 600, 500) {
         end
       end
     }
-
   }
 }.show
