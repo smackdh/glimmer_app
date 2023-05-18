@@ -64,5 +64,16 @@ window('Currency Converter', 600, 500) {
         end
       end
     }
+
+     combobox { |c|
+          stretchy false
+            label 'Currency'
+            items ["SEK", "JPY", "KRW"]
+            selected 'None'
+
+            on_selected do
+              @string.underline = c.selected_item.underscore
+            end
+          }
   }
 }.show
