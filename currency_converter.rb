@@ -11,13 +11,13 @@ require'json'
 Dotenv.load
 include Glimmer
 
-
 # DATA
 currencies = ['USD', 'EUR', 'SEK', 'JPY', 'KRW']
 currencies = currencies.join("%2C%20")
-data = []
-def get_data(currencies)
-  url = URI("https://api.apilayer.com/exchangerates_data/latest?symbols=#{currencies}&base=USD")
+
+def get_data(currency_array)
+  data = []
+  url = URI("https://api.apilayer.com/exchangerates_data/latest?symbols=#{currency_array}&base=USD")
 
   https = Net::HTTP.new(url.host, url.port);
   https.use_ssl = true
@@ -28,19 +28,14 @@ def get_data(currencies)
   response = https.request(request)
   response_hash = JSON.parse(response.body)
 
-  # för varje key skapa en ny array och ta med värdet.
-  # släng sen in en 0:a i slutet.
-
-  response_hash["rates"].each do |currency, rate|
+  response_hash['rates'].each do |currency, rate|
     item = [currency, rate, 0]
     data.append(item)
   end
-  puts data.inspect
+  data
 end
 
-# APP
-
-get_data(currencies)
+updated_data = get_data(currencies)
 
 window('Currency Converter', 600, 500) {
   vertical_box {
@@ -49,7 +44,7 @@ window('Currency Converter', 600, 500) {
       text_column('Market Value')
       text_column('Converted Value')
 
-       cell_rows data
+       cell_rows updated_data
     }
 
     search_entry { |value|
@@ -57,15 +52,15 @@ window('Currency Converter', 600, 500) {
 
       on_changed do
         new_value = value.text
-        new_data ||= data.dup
+        new_data ||= updated_data.dup
 
         # Loopa över alla valutor
         # Byta ut värdet på valuta[2] till ett nytt värde
         # Uppdatera värdena i orginal-data
         new_data.each do |currency|
-          currency[1] = 0
-          new_total = (currency[1]) + new_value.to_i * currency[0]
-          currency[1] = new_total.round(1)
+          currency[2] = 0
+          new_total = (currency[2]) + new_value.to_i * currency[1]
+          currency[2] = new_total.round(2)
         end
       end
     }
