@@ -13,18 +13,9 @@ include Glimmer
 
 
 # DATA
-
-data = [
-  [1, 0],
-  [0.923466, 0],
-  [10.45, 0],
-  [137.271, 0],
-  [1336.50, 0],
-]
-
 currencies = ['USD', 'EUR', 'SEK', 'JPY', 'KRW']
 currencies = currencies.join("%2C%20")
-
+data = []
 def get_data(currencies)
   url = URI("https://api.apilayer.com/exchangerates_data/latest?symbols=#{currencies}&base=USD")
 
@@ -35,10 +26,21 @@ def get_data(currencies)
   request['apikey'] = ENV['API_KEY']
 
   response = https.request(request)
-  puts response.body
+  response_hash = JSON.parse(response.body)
+
+  # för varje key skapa en ny array och ta med värdet.
+  # släng sen in en 0:a i slutet.
+
+  response_hash["rates"].each do |currency, rate|
+    item = [currency, rate, 0]
+    data.append(item)
+  end
+  puts data.inspect
 end
 
 # APP
+
+get_data(currencies)
 
 window('Currency Converter', 600, 500) {
   vertical_box {
@@ -49,8 +51,6 @@ window('Currency Converter', 600, 500) {
 
        cell_rows data
     }
-
-    get_data(currencies)
 
     search_entry { |value|
       stretchy false
