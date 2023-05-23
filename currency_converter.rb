@@ -13,9 +13,10 @@ include Glimmer
 
 # DATA
 currencies = ['USD', 'EUR', 'SEK', 'JPY', 'KRW']
+base_values = ['USD', 'EUR', 'SEK', 'JPY', 'KRW']
 currencies = currencies.join("%2C%20")
 
-def get_data(currency_array)
+def get_data(currency_array, base)
   data = []
   url = URI("https://api.apilayer.com/exchangerates_data/latest?symbols=#{currency_array}&base=USD")
 
@@ -35,7 +36,7 @@ def get_data(currency_array)
   data
 end
 
-updated_data = get_data(currencies)
+updated_data = get_data(currencies, "USD")
 
 window('Currency Converter', 600, 500) {
   vertical_box {
@@ -68,11 +69,11 @@ window('Currency Converter', 600, 500) {
      combobox { |c|
           stretchy false
             label 'Currency'
-            items ["SEK", "JPY", "KRW"]
+            items base_values
             selected 'None'
 
             on_selected do
-              @string.underline = c.selected_item.underscore
+             puts selected_item
             end
           }
   }
