@@ -1,3 +1,4 @@
 # ignore
 .env
 /.env
+/env
