@@ -1,3 +1,4 @@
+# Requirements
 require 'glimmer-dsl-libui'
 require 'dotenv'
 require 'uri'
@@ -16,7 +17,7 @@ def get_data(currency_array, base)
   data = []
   url = URI("https://api.apilayer.com/exchangerates_data/latest?symbols=#{currency_array}&base=USD")
 
-  https = Net::HTTP.new(url.host, url.port);
+  https = Net::HTTP.new(url.host, url.port)
   https.use_ssl = true
 
   request = Net::HTTP::Get.new(url)
@@ -63,6 +64,5 @@ window('Currency Converter', 600, 500) {
         end
       end
     }
-
   }
 }.show
