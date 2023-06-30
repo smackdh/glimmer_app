@@ -1,4 +1,4 @@
-# Currency Converter 💵
+# Rubu GUI - Currency Converter 💵
 ![msrdc_ZVAqZIWGIT](https://github.com/smackdh/glimmer_app/assets/66011769/35a19a83-c4e3-4073-a364-001e20ed8d24)
 
 ## Getting Started
