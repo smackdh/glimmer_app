@@ -4,13 +4,13 @@
 ## Getting Started
 
 ### ENV Variables
-Create `.env` file
+Create a `.env` file in the root catalog
 ```
 touch .env
 ```
 Inside `.env`, add your API-key from: https://apilayer.com/marketplace/exchangerates_data-api
 
-### Run a server
+### Run the app
 ```
 ruby currency_converter.rb
 ```
