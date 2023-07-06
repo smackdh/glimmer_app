@@ -1,3 +1,12 @@
+#!/usr/bin/env ruby
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'glimmer-dsl-libui'
+  gem 'dotenv'
+end
+
 # Requirements
 require 'glimmer-dsl-libui'
 require 'dotenv'
