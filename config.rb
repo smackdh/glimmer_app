@@ -1,0 +1,2 @@
+BASE_VALUES = ['USD', 'EUR', 'SEK', 'JPY', 'KRW'].freeze
+CURRENCIES = BASE_VALUES.dup
