@@ -12,7 +12,7 @@ Inside `.env`, add your API-key from: https://apilayer.com/marketplace/exchanger
 
 ### Run the app
 ```
-ruby currency_converter.rb
+ruby main.rb
 ```
 
 ## Built With
